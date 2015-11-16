@@ -22,3 +22,8 @@
   (is (= (get right-bits 0)      '(1 1 1 0 0 1 0)))
   (is (= (get right-bits 7)      '(1 0 0 0 1 0 0)))
 )
+
+(deftest test-left-parity-vec
+  (is (= (get left-parity-vec 5) '(:odd  :even :even :odd  :odd  :even)))
+  (is (= (get left-parity-vec 9) '(:odd  :even :even :odd  :even :odd )))
+)
