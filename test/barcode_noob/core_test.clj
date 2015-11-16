@@ -27,3 +27,23 @@
   (is (= (get left-parity-vec 5) '(:odd  :even :even :odd  :odd  :even)))
   (is (= (get left-parity-vec 9) '(:odd  :even :even :odd  :even :odd )))
 )
+
+(deftest test-enc-barcode
+  (is (= (enc-barcode '(8 7 1 1 2 5 3 0 0 1 2 0)) (apply concat (list
+           '(1 0 1)         ;; Start Marker
+           '(0 1 1 1 0 1 1) ;; 7 - Odd
+           '(0 1 1 0 0 1 1) ;; 1 - Even
+           '(0 0 1 1 0 0 1) ;; 1 - Odd
+           '(0 0 1 1 0 1 1) ;; 2 - Even
+           '(0 1 1 1 0 0 1) ;; 5 - Even
+           '(0 1 1 1 1 0 1) ;; 3 - Odd
+           '(0 1 0 1 0)     ;; Center Marker
+           '(1 1 1 0 0 1 0) ;; 0
+           '(1 1 1 0 0 1 0) ;; 0
+           '(1 1 0 0 1 1 0) ;; 1
+           '(1 1 0 1 1 0 0) ;; 2
+           '(1 1 1 0 0 1 0) ;; 0
+           '(1 1 0 1 1 0 0) ;; 2 (Check-Digit)
+           '(1 0 1)         ;; End Marker
+           )))))
+
