@@ -59,3 +59,18 @@
   '(:odd  :even :even :odd  :even :odd ) ;; 9
 ])
 
+(defn enc-left-group
+  "given a seq of digits, generate a seq of bits for the left group"
+  [first-digit ds]
+  (assert (= (count ds) 6))
+  (let [
+         parity-list (get left-parity-vec first-digit)
+         left-vecs (map #(case % :odd  left-odd-bits
+                                 :even left-even-bits) parity-list)]
+    (map #(get %1 %2) left-vecs ds)))
+
+(defn enc-right-group
+  "given a seq of digits, generate a seq of bits for the right group"
+  [ds]
+  (assert (= (count ds) 6))
+    (map #(get right-bits %) ds))
