@@ -13,3 +13,12 @@
   (is (not (validate-digits? '(4 0 0 6 3 8 1 3 3 3 9 3 2))))
   (is (not (validate-digits? '(5 9 0 1 2 3 4 4 2 3 4 5 7))))
 )
+
+(deftest test-bit-tables
+  (is (= (get left-odd-bits 3)   '(0 1 1 1 1 0 1)))
+  (is (= (get left-odd-bits 9)   '(0 0 0 1 0 1 1)))
+  (is (= (get left-even-bits 4)  '(0 0 1 1 1 0 1)))
+  (is (= (get left-even-bits 6)  '(0 0 0 0 1 0 1)))
+  (is (= (get right-bits 0)      '(1 1 1 0 0 1 0)))
+  (is (= (get right-bits 7)      '(1 0 0 0 1 0 0)))
+)

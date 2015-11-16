@@ -23,3 +23,25 @@
          ds (reverse (rest rev-d))]
     (= last-d (check-digit ds))
   ))
+
+(def left-odd-bits [
+  '(0 0 0 1 1 0 1)
+  '(0 0 1 1 0 0 1)
+  '(0 0 1 0 0 1 1)
+  '(0 1 1 1 1 0 1)
+  '(0 1 0 0 0 1 1)
+  '(0 1 1 0 0 0 1)
+  '(0 1 0 1 1 1 1)
+  '(0 1 1 1 0 1 1)
+  '(0 1 1 0 1 1 1)
+  '(0 0 0 1 0 1 1)
+  ])
+
+(def right-bits
+  (let [
+         bitwise-complement (fn [x] (map #(- 1 %) x))
+         ]
+    (vec (map bitwise-complement left-odd-bits))))
+
+(def left-even-bits
+  (vec (map reverse right-bits)))
