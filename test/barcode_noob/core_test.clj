@@ -3,7 +3,9 @@
   (:use barcode-noob.ean13-defs)
   (:use barcode-noob.validate)
   (:use barcode-noob.encode)
-  (:use barcode-noob.image))
+  (:use barcode-noob.decode)
+  (:use barcode-noob.image)
+  (:use barcode-noob.core))
 
 (deftest test-validate-digits-true
   (is (validate-digits? '(4 0 0 6 3 8 1 3 3 3 9 3 1))) ;; Wiki Main Picture
