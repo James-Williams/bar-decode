@@ -59,6 +59,12 @@
   '(:odd  :even :even :odd  :even :odd ) ;; 9
 ])
 
+(defn first-digit-from-parity
+ [parity-list]
+ (->> parity-list
+   (.indexOf left-parity-vec)
+   (#(if (= % -1) nil %))))
+
 (defn enc-left-group
   "given a seq of digits, generate a seq of bits for the left group"
   [first-digit ds]

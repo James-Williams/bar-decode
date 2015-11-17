@@ -28,6 +28,11 @@
   (is (= (get left-parity-vec 9) '(:odd  :even :even :odd  :even :odd )))
 )
 
+(deftest test-first-digit-from-parity
+  (is (= (first-digit-from-parity '(:odd  :odd  :even :even :even :odd )) 3))
+  (is (= (first-digit-from-parity '(:odd  :even :odd  :odd  :even :even)) 4))
+  (is (= (first-digit-from-parity '(:even :even :odd  :odd  :even :even)) nil)))
+
 (deftest test-enc-barcode
   (is (= (enc-barcode '(8 7 1 1 2 5 3 0 0 1 2 0)) (apply concat (list
            '(1 0 1)         ;; Start Marker
