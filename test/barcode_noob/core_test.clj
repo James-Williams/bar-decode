@@ -76,6 +76,18 @@
 (def example-image-line-pairs
   (map vector example-image-line (cycle '(0 1))))
 
+;; Need to manually find the start of the barcode using (rest ..)
 (deftest test-split-runs
   (is (= (first (split-runs (rest example-image-line-pairs))) 
          example-image-expected)))
+
+;; Scans across the line for a valid barcode
+(deftest test-split-runs
+  (is (= (first (scan-row example-image-line-pairs))
+         example-image-expected)))
+
+(deftest test-scan-list
+  (is (= (scan-list (list)) (list)))
+  (is (= (scan-list (list :d)) (list (list :d))))
+  (is (= (scan-list '(:a :b :c)) (list '(:a :b :c) '(:b :c) (list :c))))
+)
