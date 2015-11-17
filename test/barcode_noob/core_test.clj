@@ -94,4 +94,7 @@
 
 ;; Top level image decode test
 (deftest test-scan-pgm
-  (is (= (first (scan-pgm "barcode-example1.pgm")) example-image-expected)))
+  (is (= (first (scan-pgm "barcode-example1.pgm")) example-image-expected))
+  (is (= (first (scan-pgm "barcode-example3-crop.pgm"))
+         '(9 7 8 0 5 9 6 5 1 4 9 8 3))))
+

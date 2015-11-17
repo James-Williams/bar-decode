@@ -67,7 +67,9 @@
            )
          left-group (map first left-digit-parity-pairs)
          ]
-    (cons first-digit left-group)))
+    (if (= first-digit nil) 
+      nil 
+      (cons first-digit left-group))))
 
 (defn match-right-digit
   [scaled-run]
@@ -97,9 +99,11 @@
                right-groups   (partition 4 (take 24 (drop 32 runs)))
                left-matches   (map match-left-digit (map scale-list left-groups))
                right-matches  (map match-right-digit (map scale-list right-groups))
-               left-guess     (extract-first-digit (map first left-matches))
+               left-guess-maybe (extract-first-digit (map first left-matches))
                right-guess    (map first right-matches)
-               guess          (concat left-guess right-guess) ]
+               guess          (if (= left-guess-maybe nil) 
+                                (list) 
+                                (concat left-guess-maybe right-guess)) ]
            (filter validate-digits? (vector guess))))))
 
 (defn scan-list
@@ -117,8 +121,8 @@
 
 (defn process-row [row] (scan-row (compress row)))
 
-(defn process-pgm-lines
-  [delta ls]
+(defn pgm-to-pixels
+  [ls]
   (let [
          header (take 3 ls)
          data   (drop 3 ls)
@@ -127,15 +131,23 @@
          dims   (str/split (nth header 2) #"\s")
          width  (read-string (nth dims 0))
          height (read-string (nth dims 1))
-         rows   (partition width values)
-         rows-bits (map #(grey-threshold delta %) rows)
-       ]
+         rows   (partition width values) ]
     (assert (= type "P2"))
     (assert (= (count rows) height))
+    rows))
+
+(defn process-pgm-lines
+  [delta ls]
+  (let [ rows (pgm-to-pixels ls)
+         rows-bits (map #(grey-threshold delta %) rows)
+       ]
     (reduce concat (map process-row rows-bits))))
 
-(defn scan-pgm
-  [filename]
+(defn process-pgm
+  [f filename]
   (with-open [rdr (clojure.java.io/reader filename)]
-    (doall (process-pgm-lines THRESHOLD-DELTA (line-seq rdr)))))
+    (doall (f (line-seq rdr)))))
+
+(defn scan-pgm [filename] 
+  (process-pgm #(process-pgm-lines THRESHOLD-DELTA %) filename))
 
