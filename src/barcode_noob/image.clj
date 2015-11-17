@@ -54,7 +54,7 @@
          (sort-by #(nth % 1))
          (map first)
          (take 3)
-         (map #(mod % 10)) ;; TODO Need to include odd/even in output
+         (map #(vector (mod % 10) (if (< % 10) :odd :even)))
     )))
 
 (defn process-row
