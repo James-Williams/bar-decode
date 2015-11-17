@@ -3,11 +3,6 @@
   (:use clojure.test)
   )
 
-(defn -main
-  "I don't do a whole lot ... yet."
-  [& args]
-  (println "Hello, World!"))
-
 (defn check-digit
   "Produces the check digit from a list of digits"
   [ds]
