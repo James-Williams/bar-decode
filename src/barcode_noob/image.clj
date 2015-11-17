@@ -128,14 +128,13 @@
          width  (read-string (nth dims 0))
          height (read-string (nth dims 1))
          rows   (partition width values)
-         row    (nth rows 21) ;; TODO Scan through the rows instead of picking 21
-         row-bits (grey-threshold delta row)
+         rows-bits (map #(grey-threshold delta %) rows)
        ]
     (assert (= type "P2"))
     (assert (= (count rows) height))
-    (process-row row-bits)))
+    (reduce concat (map process-row rows-bits))))
 
-(defn read-pgm
+(defn scan-pgm
   [filename]
   (with-open [rdr (clojure.java.io/reader filename)]
     (doall (process-pgm-lines THRESHOLD-DELTA (line-seq rdr)))))

@@ -91,3 +91,7 @@
   (is (= (scan-list (list :d)) (list (list :d))))
   (is (= (scan-list '(:a :b :c)) (list '(:a :b :c) '(:b :c) (list :c))))
 )
+
+;; Top level image decode test
+(deftest test-scan-pgm
+  (is (= (first (scan-pgm "barcode-example1.pgm")) example-image-expected)))
