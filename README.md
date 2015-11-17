@@ -1,36 +1,13 @@
-# barcode-noob
+# Bar-Decode
 
-FIXME: description
-
-## Installation
-
-Download from http://example.com/FIXME.
+Clojure lirary for EAN-13 barcodes. Provides functions for encoding, decoding and validating.
 
 ## Usage
 
-FIXME: explanation
+To scan an ASCII format PGM image for an EAN-13 barcode:
 
-    $ java -jar barcode-noob-0.1.0-standalone.jar [args]
-
-## Options
-
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
+    $ java -jar bar-decode-0.1.0-standalone.jar <image.pgm>
 
 ## License
 
-Copyright © 2015 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+Copyright © 2015. Distributed under the Eclipse Public License either version 1.0.
