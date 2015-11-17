@@ -1,11 +1,18 @@
 (ns barcode-noob.image
   (:gen-class)
   (:require [clojure.string :as str])
-  (:use barcode-noob.core)
+  (:use barcode-noob.ean13-defs)
+  (:use barcode-noob.validate)
   )
 
 (def THRESHOLD-DELTA 0.42)
 (def NUM-DIGIT-MATCHES 1)
+
+(defn first-digit-from-parity
+ [parity-list]
+ (->> parity-list
+   (.indexOf left-parity-vec)
+   (#(if (= % -1) nil %))))
 
 (defn grey-threshold
   "takes d in (0,1) and convert all values to 0 or 1"

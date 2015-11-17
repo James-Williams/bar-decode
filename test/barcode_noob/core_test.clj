@@ -1,7 +1,9 @@
 (ns barcode-noob.core-test
-  (:require [clojure.test :refer :all]
-            [barcode-noob.core :refer :all]
-            [barcode-noob.image :refer :all]))
+  (:require [clojure.test :refer :all])
+  (:use barcode-noob.ean13-defs)
+  (:use barcode-noob.validate)
+  (:use barcode-noob.encode)
+  (:use barcode-noob.image))
 
 (deftest test-validate-digits-true
   (is (validate-digits? '(4 0 0 6 3 8 1 3 3 3 9 3 1))) ;; Wiki Main Picture
@@ -34,8 +36,8 @@
   (is (= (first-digit-from-parity '(:odd  :even :odd  :odd  :even :even)) 4))
   (is (= (first-digit-from-parity '(:even :even :odd  :odd  :even :even)) nil)))
 
-(deftest test-enc-barcode
-  (is (= (enc-barcode '(8 7 1 1 2 5 3 0 0 1 2 0)) (apply concat (list
+(deftest test-enc-digits
+  (is (= (enc-digits '(8 7 1 1 2 5 3 0 0 1 2 0)) (apply concat (list
            '(1 0 1)         ;; Start Marker
            '(0 1 1 1 0 1 1) ;; 7 - Odd
            '(0 1 1 0 0 1 1) ;; 1 - Even
@@ -52,7 +54,7 @@
            '(1 1 0 1 1 0 0) ;; 2 (Check-Digit)
            '(1 0 1)         ;; End Marker
            ))))
-  (is (= (enc-barcode '(9 7 8 0 5 9 6 5 1 4 9 8)) (apply concat (list
+  (is (= (enc-digits  '(9 7 8 0 5 9 6 5 1 4 9 8)) (apply concat (list
            '(1 0 1)         ;; Start Marker
            '(0 1 1 1 0 1 1) ;; 7 - Odd
            '(0 0 0 1 0 0 1) ;; 8 - Even
