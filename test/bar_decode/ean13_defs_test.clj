@@ -1,6 +1,6 @@
-(ns barcode-noob.ean13-defs-test
+(ns bar-decode.ean13-defs-test
   (:require [clojure.test :refer :all])
-  (:use barcode-noob.ean13-defs))
+  (:use bar-decode.ean13-defs))
 
 (deftest test-bit-tables
   (is (= (get left-odd-bits 3)   '(0 1 1 1 1 0 1)))

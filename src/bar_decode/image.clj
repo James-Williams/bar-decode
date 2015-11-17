@@ -1,4 +1,4 @@
-(ns barcode-noob.image
+(ns bar-decode.image
   (:gen-class)
   (:require [clojure.string :as str])
   )

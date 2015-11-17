@@ -1,6 +1,6 @@
-(ns barcode-noob.core-test
+(ns bar-decode.core-test
   (:require [clojure.test :refer :all])
-  (:use barcode-noob.core))
+  (:use bar-decode.core))
 
 ;; Top level image decode test
 (deftest test-scan-pgm

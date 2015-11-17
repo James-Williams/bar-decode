@@ -1,6 +1,6 @@
-(ns barcode-noob.validate-test
+(ns bar-decode.validate-test
   (:require [clojure.test :refer :all])
-  (:use barcode-noob.validate))
+  (:use bar-decode.validate))
 
 (deftest test-validate-digits-true
   (is (validate-digits? '(4 0 0 6 3 8 1 3 3 3 9 3 1))) ;; Wiki Main Picture

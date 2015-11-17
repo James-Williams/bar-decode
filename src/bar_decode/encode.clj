@@ -1,6 +1,6 @@
-(ns barcode-noob.encode
-  (:use barcode-noob.ean13-defs)
-  (:use barcode-noob.validate))
+(ns bar-decode.encode
+  (:use bar-decode.ean13-defs)
+  (:use bar-decode.validate))
 
 (defn enc-left-group
   "given a seq of digits, generate a seq of bits for the left group"

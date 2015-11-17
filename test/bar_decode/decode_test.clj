@@ -1,6 +1,6 @@
-(ns barcode-noob.decode-test
+(ns bar-decode.decode-test
   (:require [clojure.test :refer :all])
-  (:use barcode-noob.decode))
+  (:use bar-decode.decode))
 
 (deftest test-first-digit-from-parity
   (is (= (first-digit-from-parity '(:odd  :odd  :even :even :even :odd )) 3))

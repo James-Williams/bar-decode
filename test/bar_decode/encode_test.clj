@@ -1,6 +1,6 @@
-(ns barcode-noob.encode-test
+(ns bar-decode.encode-test
   (:require [clojure.test :refer :all])
-  (:use barcode-noob.encode))
+  (:use bar-decode.encode))
 
 (deftest test-enc-digits
   (is (= (enc-digits '(8 7 1 1 2 5 3 0 0 1 2 0)) (apply concat (list

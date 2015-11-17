@@ -1,5 +1,5 @@
-(ns barcode-noob.validate
-  (:use barcode-noob.ean13-defs))
+(ns bar-decode.validate
+  (:use bar-decode.ean13-defs))
 
 (defn check-digit
   "Produces the check digit from a list of digits"

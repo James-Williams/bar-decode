@@ -1,7 +1,7 @@
-(ns barcode-noob.core
+(ns bar-decode.core
   (:gen-class)
-  (:use barcode-noob.decode)
-  (:use barcode-noob.image))
+  (:use bar-decode.decode)
+  (:use bar-decode.image))
 
 (def THRESHOLD-DELTA 0.42)
 

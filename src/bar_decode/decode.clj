@@ -1,6 +1,6 @@
-(ns barcode-noob.decode
-  (:use barcode-noob.ean13-defs)
-  (:use barcode-noob.validate))
+(ns bar-decode.decode
+  (:use bar-decode.ean13-defs)
+  (:use bar-decode.validate))
 
 (def NUM-DIGIT-MATCHES 1)
 

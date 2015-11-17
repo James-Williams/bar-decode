@@ -1,4 +1,4 @@
-(ns barcode-noob.ean13-defs
+(ns bar-decode.ean13-defs
   (:gen-class))
 
 (def left-odd-bits [
