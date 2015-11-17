@@ -128,3 +128,5 @@
   (map scale-list)
   (map match-right-digit)))
 
+(def working-full (concat (extract-first-digit (map first working-left)) (map first working-right)))
+
