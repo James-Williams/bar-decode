@@ -1,6 +1,7 @@
 (ns barcode-noob.core-test
   (:require [clojure.test :refer :all]
-            [barcode-noob.core :refer :all]))
+            [barcode-noob.core :refer :all]
+            [barcode-noob.image :refer :all]))
 
 (deftest test-validate-digits-true
   (is (validate-digits? '(4 0 0 6 3 8 1 3 3 3 9 3 1))) ;; Wiki Main Picture
@@ -70,3 +71,11 @@
            ))))
 )
 
+(def example-image-expected '(9 7 8 0 1 3 2 1 1 4 6 7 7))
+(def example-image-line '(22 2 2 2 2 7 2 5 7 1 6 2 2 2 4 6 6 4 4 2 2 3 9 2 4 2 5 4 2 3 1 3 2 4 5 5 1 5 4 5 1 3 2 7 5 1 2 2 10 2 7 1 6 1 7 2 5 2 1 3 7))
+(def example-image-line-pairs
+  (map vector example-image-line (cycle '(0 1))))
+
+(deftest test-split-runs
+  (is (= (first (split-runs (rest example-image-line-pairs))) 
+         example-image-expected)))

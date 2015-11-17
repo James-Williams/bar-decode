@@ -83,14 +83,31 @@
          (take NUM-DIGIT-MATCHES)
     )))
 
+(defn split-runs
+  "Given a set of run counts (c,v), return a list of possible matches
+   starting at begining of the sequence"
+  [run-pairs]
+  (let [ start-marker   (map #(first (drop 1 %)) (take 3 run-pairs))
+         runs           (map first run-pairs)
+         left-groups    (partition 4 (take 24 (drop 3 runs)))
+         center-marker  (take 5 (drop 27 run-pairs))
+         right-groups   (partition 4 (take 24 (drop 32 runs)))
+         left-matches   (map match-left-digit (map scale-list left-groups))
+         right-matches  (map match-right-digit (map scale-list right-groups))
+         left-guess     (extract-first-digit (map first left-matches))
+         right-guess    (map first right-matches)
+         guess          (concat left-guess right-guess)
+         ]
+  (if (and (= start-marker '(1 0 1)) (> (count run-pairs) (+ 3 24 5 24)))
+    (filter validate-digits? (vector guess))
+    (list))))
+
 (defn process-row
   [row]
   (let [
-         runs   (map first (compress row))
-         digit-runs (drop 4 runs)
+         runs   (compress row)
        ]
-    digit-runs))
-
+    (split-runs (rest runs)))) ;; TODO Tempory hack to remove the initial whitespace
 
 (defn process-pgm-lines
   [delta ls]
@@ -114,19 +131,4 @@
   [filename]
   (with-open [rdr (clojure.java.io/reader filename)]
     (doall (process-pgm-lines THRESHOLD-DELTA (line-seq rdr)))))
-
-;; TODO Test code from REPL - WORKING DECODE OF LEFT DIGITS!!!
-;;        Need to build this into more functions!
-
-(def l (first (read-pgm "barcode-example1.pgm")))
-(def working-left (map match-left-digit (map scale-list (take 6 (partition 4 l)))))
-
-(def r (drop (+ 5 (* 6 4)) l))
-(def working-right (->> r
-  (partition 4) 
-  (take 6) 
-  (map scale-list)
-  (map match-right-digit)))
-
-(def working-full (concat (extract-first-digit (map first working-left)) (map first working-right)))
 
